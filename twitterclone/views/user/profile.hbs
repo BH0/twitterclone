@@ -1,21 +1,41 @@
 <h1>{{user.email}}</h1>
 
-<h1> Post Tweet</h1> 
+<h1> Post Tweet</h1>
 <form method="POST" action="/user/profile/tweet" id="tweetForm">
     <textarea id="tweet" name="tweet"
         <!--less than 140 characters -->
     </textarea>
     <input type="hidden" name="author" value="{{user.email}}">
     <button id="postTweet">Tweet</button>
-</form> 
+</form>
+
+
+<h2> Follow user</h2>
+<form method="POST" action="/user/profile/follow" id="tweetForm">
+    <input type="text" name="user" />
+    <input type="submit" value="Follow person" />
+</form>
+
+<h1>Tweets</h1>
+{{# each tweets }}
+{{# each this }}
+<p>{{this.tweet}} </p>
+<i>{{this.author}}</i>
+{{/each}}
+{{/each}}
+
+<h2>Following</h2>
+{{user.following}}
+<h2>Followers</h2>
+{{user.followers}}
 
 <script>
     document.getElementById("postTweet").addEventListener("click", e => {
-        e.preventDefault(); 
+        e.preventDefault();
         if (document.getElementById("tweet").value.length <= 140) {
-            document.getElementById("tweetForm").submit(); 
+            document.getElementById("tweetForm").submit();
         } else {
-            alert("No more than 140 characters."); 
-        } 
-    }); 
+            alert("No more than 140 characters.");
+        }
+    });
 </script>

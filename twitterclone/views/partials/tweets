@@ -1,0 +1,7 @@
+<h1>Tweets</h1>
+{{# each tweets }}
+    {{# each this }}
+        <p>{{this.tweet}} </p>
+        <i>{{this.author}}</i>
+    {{/each}}
+{{/each}}

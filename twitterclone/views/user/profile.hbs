@@ -1,33 +1,49 @@
-<h1>{{user.email}}</h1>
+<div class="container">
 
-<h1> Post Tweet</h1>
-<form method="POST" action="/user/profile/tweet" id="tweetForm">
-    <textarea id="tweet" name="tweet"
-        <!--less than 140 characters -->
-    </textarea>
-    <input type="hidden" name="author" value="{{user.email}}">
-    <button id="postTweet">Tweet</button>
-</form>
+    <h1 class="title is-2">{{user.email}}'s Profile</h1>
+
+    <div class='block'> 
+        <h1 class="title is-2"> Post Tweet</h1>
+        <form method="POST" action="/user/profile/tweet" id="tweetForm">
+            <textarea id="tweet" name="tweet"
+                <!--less than 140 characters -->
+            </textarea>
+            <input type="hidden" name="author" value="{{user.email}}">
+            <button class="button is-success" id="postTweet">Tweet</button>
+        </form>
+    </div> 
 
 
-<h2> Follow user</h2>
-<form method="POST" action="/user/profile/follow" id="tweetForm">
-    <input type="text" name="user" />
-    <input type="submit" value="Follow person" />
-</form>
+    <div class="block"> 
+        <div class="box"> 
+            <h2 class="title is-2"> Follow user</h2>
+            <form method="POST" action="/user/profile/follow" id="tweetForm">
+                <input type="text" name="user" />
+                <input class="button is-success" type="submit" value="Follow person" />
+            </form> 
+        </div> 
+    </div> 
 
-<h1>Tweets</h1>
-{{# each tweets }}
-{{# each this }}
-<p>{{this.tweet}} </p>
-<i>{{this.author}}</i>
-{{/each}}
-{{/each}}
+    <div class="block"> 
+        <h1 class="title is-1">Tweets</h1>
+            {{# each tweets }}
+            {{# each this }}
+            <div class="notification"> 
+                <p>{{this.tweet}} </p>
+                <i>{{this.author}}</i>
+            </div> 
+            {{/each}}
+            {{/each}}
+   </div> 
 
-<h2>Following</h2>
-{{user.following}}
-<h2>Followers</h2>
-{{user.followers}}
+    <div class="block"> 
+        <h2 class="title is-2">Following</h2>
+        {{user.following}}
+        <h2 class="title is-2">Followers</h2>
+        {{user.followers}} 
+    </div> 
+
+</div> 
 
 <script>
     document.getElementById("postTweet").addEventListener("click", e => {
@@ -39,3 +55,4 @@
         }
     });
 </script>
+

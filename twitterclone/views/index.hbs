@@ -1,20 +1,35 @@
 {{# if login }}
-<li><a href="/user/profile">User Account</a></li>
-<li><a href="/user/signout">Sign out</a></li>
-{{# each tweets }}
-{{# each this }}
-<p>{{this.tweet}} </p>
-<i>{{this.author}}</i>
-{{/each}}
-{{/each}}
+
+<div class="block">
+    <a class="nav-item" href="/user/profile">User Account</a>
+    <a class="nav-item" href="/user/signout">Sign out</a>
+    <h1 class-"title is-1">Tweets</h1>
+    {{# each tweets }}
+    {{# each this }}
+    <div class="notification">
+        <p>{{this.tweet}} </p>
+        <i>{{this.author}}</i>
+    </div>
+    {{/each}}
+    {{/each}}
+</div>
+
 {{ else }}
-<li><a href="/user/signup">Sign up</a></li>
-<li><a href="/user/signin">Sign in</a></li>
-<h1>Tweets</h1>
-{{# each tweets }}
-{{# each this }}
-<p>{{this.tweet}} </p>
-<i>{{this.author}}</i>
-{{/each}}
-{{/each}}
-{{/if}}
+
+<div class="block">
+
+    <a class="nav-item" href="/user/signup">Sign up</a></li>
+    <a class="nav-item" href="/user/signin">Sign in</a></li>
+
+    <h1 class-"title is-1">Tweets</h1>
+    {{# each tweets }}
+    {{# each this }}
+    <div class="notification">
+        <p>{{this.tweet}} </p>
+        <i>{{this.author}}</i>
+    </div>
+    {{/each}}
+    {{/each}}
+</div> 
+
+    {{/if}}

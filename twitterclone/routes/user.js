@@ -7,25 +7,55 @@ const Strategy = require('passport-local').Strategy;
 
 const Tweet = require('../models/tweet');
 const User = require('../models/user');
-const Private = require('../private/private');
 
-mongoose.connect(Private.database_instance);
+router.get("/profile/:following", (req, res, next) => { 
+    User.findOne({ 
+        email: req.params.following 
+    }).then(user => { 
+        res.send(`Viewing ${user.email}'s page: \n /n ${user.email} + more data which is yet to be added`); 
+    }); 
+}); 
 
-router.get('/profile', isLoggedIn, (req, res, next) => {
+router.get('/profile', isLoggedIn, (req, res, next) => { 
+    let following = []; 
+    User.findOne({ 
+        email: req.user.email 
+    }).then(user => { 
+        for (let i = 0; i < user.friends.length; i++) { 
+            following.push(user.friends[i]); 
+        } 
+    }); 
 
-    Tweet.find((err, docs) => {
+    Tweet.find((err, docs) => { 
         let tweets = [];
         for (let i = 0; i < docs.length; i += 1) {
             tweets.push(docs.slice(i, i + 1));
-        }
+        } 
         res.render('user/profile', {
-            tweets: tweets, login: req.isAuthenticated(), user: req.user
+            following: following, tweets: tweets, login: req.isAuthenticated(), user: req.user
         });
     });
 });
 
 ///*** Following / Followers ***\\\
-router.post('/profile/follow', (req, res, next) => {
+router.post("/profile/follow", (req, res, next) => { 
+    let userUsername = req.body.userToFollow; 
+    let friend = { 
+        name: userUsername
+    } 
+    User.findOne({ 
+        email: req.user.email 
+    }).then(user => { 
+        // friend.save(); 
+        // user.friends.push(friend); 
+        user.friends.push(friend); 
+        user.save(); 
+        res.send(`${friend.name} has been followed`); 
+        // console.log("F: " + user.friends); 
+    });  
+}); 
+
+/* router.post('/profile/follow', (req, res, next) => {
     let toFollow = req.body.user;
     User.findOne({
         email: req.user.email
@@ -41,6 +71,7 @@ router.post('/profile/follow', (req, res, next) => {
     });
     res.redirect('user/profile')
 });
+*/ 
 ///**************************\\\
 
 ///*** Tweet ***\\\

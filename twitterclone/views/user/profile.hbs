@@ -5,9 +5,7 @@
     <div class='block'> 
         <h1 class="title is-2"> Post Tweet</h1>
         <form method="POST" action="/user/profile/tweet" id="tweetForm">
-            <textarea id="tweet" name="tweet"
-                <!--less than 140 characters -->
-            </textarea>
+            <textarea id="tweet" name="tweet"></textarea>                
             <input type="hidden" name="author" value="{{user.email}}">
             <button class="button is-success" id="postTweet">Tweet</button>
         </form>
@@ -18,7 +16,7 @@
         <div class="box"> 
             <h2 class="title is-2"> Follow user</h2>
             <form method="POST" action="/user/profile/follow" id="tweetForm">
-                <input type="text" name="user" />
+                <input type="text" name="userToFollow" />
                 <input class="button is-success" type="submit" value="Follow person" />
             </form> 
         </div> 
@@ -37,10 +35,20 @@
    </div> 
 
     <div class="block"> 
+        <!-- 
         <h2 class="title is-2">Following</h2>
-        {{user.following}}
+        {user.following}}
         <h2 class="title is-2">Followers</h2>
-        {{user.followers}} 
+        {user.followers}} 
+        --> 
+        <h2 class="title is-2">Following</h2> 
+        {{# each following }} 
+        {{# each this }} 
+        <div> 
+            <h3><a href="/user/profile/{{this.name}}">{{ this.name }}</a></h3> 
+        </div> 
+        {{/each}} 
+        {{/each}}
     </div> 
 
 </div> 

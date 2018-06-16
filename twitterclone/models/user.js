@@ -2,6 +2,18 @@ let mongoose = require("mongoose");
 let bcrypt = require('bcrypt-nodejs');
 let Schema = mongoose.Schema;
 
+// friend = following 
+let friendSchema = new Schema({ 
+    name: {type: String } 
+}); 
+
+let userSchema = new Schema({ 
+    email: {type: String, required: true}, 
+    password: {type: String, required: true}, 
+    friends: [friendSchema]
+}); 
+
+/* 
 let userSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true }, 
@@ -12,6 +24,7 @@ let userSchema = new Schema({
         type: String 
     }]
 }); 
+*/ 
 
 // possibly an example of prototypical inheritance  
 /* 

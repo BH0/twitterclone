@@ -8,14 +8,13 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-const Private = require('./private/private');
-
 const routes = require('./routes/index');
 const userRoutes = require('./routes/user');
 
 const app = express();
 
-mongoose.connect(Private.database_instance);
+mongoose.connect("your-mongodb-connection-string"); 
+mongoose.Promise = global.Promise; 
 
 require('./config/passport');
 

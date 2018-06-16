@@ -6,11 +6,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 
-const Private = require('../Private/private'); 
-
 const tweet = require('../models/tweet');
-
-mongoose.connect(Private.database_instance);
 
 router.get('/', (req, res, next) => { 
     tweet.find((err, docs) => {
